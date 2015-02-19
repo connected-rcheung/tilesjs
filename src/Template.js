@@ -163,10 +163,18 @@
     Tiles.Template.fromJSON = function(rows) {
         // convert rows to cells and then to rects
         var cells = parseCells(rows),
-            rects = parseRects(cells);
+            rects = parseRects(cells),
+            i;
+
+        var numCols = 0;
+        for (i = 0; i < cells.length; i++) {
+            if (cells[i].length > numCols) {
+                numCols = cells[i].length;
+            }
+        }
         return new Tiles.Template(
             rects,
-            cells.length > 0 ? cells[0].length : 0,
+            numCols,
             cells.length);
     };
 
