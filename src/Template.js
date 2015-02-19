@@ -160,7 +160,7 @@
         this.numTiles += other.numTiles;
     };
 
-    Tiles.Template.fromJSON = function(rows) {
+    Tiles.Template.fromJSON = function(rows, maxCols) {
         // convert rows to cells and then to rects
         var cells = parseCells(rows),
             rects = parseRects(cells),
@@ -174,7 +174,7 @@
         }
         return new Tiles.Template(
             rects,
-            numCols,
+            maxCols ? maxCols : numCols,
             cells.length);
     };
 
