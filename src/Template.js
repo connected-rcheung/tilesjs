@@ -68,7 +68,7 @@
     var parseRects = function(cells) {
         var rects = [],
             numRows = cells.length,
-            numCols = numRows === 0 ? 0 : cells[0].length,
+            numCols = numRows === 0 ? 0 : Tiles.Template.getColsForCells(cells),
             cell, height, width, x, y, rectX, rectY;
 
         // make a copy of the cells that we can modify
@@ -166,15 +166,9 @@
             rects = parseRects(cells),
             i;
 
-        var numCols = 0;
-        for (i = 0; i < cells.length; i++) {
-            if (cells[i].length > numCols) {
-                numCols = cells[i].length;
-            }
-        }
         return new Tiles.Template(
             rects,
-            maxCols ? maxCols : numCols,
+            maxCols ? maxCols : Tiles.Template.getColsForCells(cells),
             cells.length);
     };
 
@@ -222,5 +216,15 @@
     
     // period used to designate a single 1x1 cell tile
     Tiles.Template.SINGLE_CELL = '.';
+
+    Tiles.Template.getColsForCells = function (cells) {
+        var numCols = 0;
+        for (i = 0; i < cells.length; i++) {
+            if (cells[i].length > numCols) {
+                numCols = cells[i].length;
+            }
+        }
+        return numCols;
+    };
 
 })(jQuery);
