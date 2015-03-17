@@ -97,7 +97,7 @@ var Tiles = {};
         // make css changes with animation when requested
         if (animate && changed) {
 
-            this.$el.animate(cssChanges, {
+            this.$el.stop().animate(cssChanges, {
                 duration: duration,
                 easing: 'swing',
                 complete: validateChangesAndComplete
