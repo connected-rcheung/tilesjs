@@ -88,20 +88,24 @@ var Tiles = {};
                     tile.$el.css('top', tile.top);
                 }
 
-                if (onComplete) {
-                    onComplete();
-                }
+                //if (onComplete) {
+                //    onComplete();
+                //}
             };
 
 
         // make css changes with animation when requested
         if (animate && changed) {
 
-            this.$el.stop().animate(cssChanges, {
+            var animateOpts = {
                 duration: duration,
                 easing: 'swing',
                 complete: validateChangesAndComplete
-            });
+            };
+            if (onComplete) {
+                animateOpts.always = onComplete;
+            }
+            this.$el.stop().animate(cssChanges, animateOpts);
         }
         else {
 
