@@ -103,7 +103,6 @@ var Tiles = {};
             if (onComplete) {
                 animateOpts.always = onComplete;
             }
-            console.log(animateOpts);
             this.$el.stop().animate(cssChanges, animateOpts);
         }
         else {
