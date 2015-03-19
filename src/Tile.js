@@ -45,7 +45,8 @@ var Tiles = {};
     };
 
     // updates the tile layout with optional animation
-    Tile.prototype.resize = function(cellRect, pixelRect, animate, duration, onComplete) {
+    Tile.prototype.resize = function(cellRect, pixelRect, animate, duration, easing, onComplete) {
+        easing = easing || 'swing';
        
         // store the list of needed changes
         var cssChanges = {},
@@ -87,10 +88,6 @@ var Tiles = {};
                     //console.log ('mismatch top:' + tile.top + ' actual:' + el.offsetTop + ' id:' + tile.id);
                     tile.$el.css('top', tile.top);
                 }
-
-                //if (onComplete) {
-                //    onComplete();
-                //}
             };
 
 
@@ -100,12 +97,13 @@ var Tiles = {};
 
             var animateOpts = {
                 duration: duration,
-                easing: 'swing',
+                easing: easing,
                 complete: validateChangesAndComplete
             };
             if (onComplete) {
                 animateOpts.always = onComplete;
             }
+            console.log(animateOpts);
             this.$el.stop().animate(cssChanges, animateOpts);
         }
         else {
