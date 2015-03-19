@@ -96,6 +96,7 @@ var Tiles = {};
 
         // make css changes with animation when requested
         if (animate && changed) {
+            tile.$el.trigger('tile.resized', cssChanges);
 
             var animateOpts = {
                 duration: duration,
